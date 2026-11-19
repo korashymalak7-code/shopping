@@ -8,7 +8,7 @@
 
 @if(cartService.isValid()){
   <div class="popup">
-    <div class="box d-block" [enimate.enter]="'fadeInBox'" [enimate.leave]="'fadeOutBox'"> 
+    <div class="box d-block" [animate.enter]="'fadeInBox'" [animate.leave]="'fadeOutBox'"> 
       <i class="fa-solid fa-x exit"(click)="cartService.togglePopup()"></i>
       <button type="button" class="me-2 addCart">
           <i class="fa-solid fa-cart-plus fa-jello"></i>

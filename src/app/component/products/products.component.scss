@@ -5,7 +5,7 @@ $mainColor:rgb(156, 32, 130);
 @keyframes fadeInBox{
   from{
     opacity:0;
-    transform: translateY(-100%);
+    transform: translateY(100%);
   }
   to{
     opacity:1;
@@ -20,7 +20,7 @@ $mainColor:rgb(156, 32, 130);
   }
   to{
     opacity:0;
-    transform: translateY(-100%);
+    transform: translateY(100%);
   }
 }
 
@@ -51,11 +51,11 @@ $mainColor:rgb(156, 32, 130);
 }
 
 .fadeInBox{
-  animation:fadeInBox 1s linear;
+  animation:fadeInBox .5s linear;
 }
 
 .fadeOutBox{
-  animation:fadeOutBox 1s linear;
+  animation:fadeOutBox .5s linear;
 }
 
 .row{
