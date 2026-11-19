@@ -1,0 +1,109 @@
+<div class="card text-center">
+  <!-- ****************** head ******************  -->
+  <div class="card-header d-flex justify-content-around align-items-center position-relative">
+    <button type="button" class="me-2 add position-relative">
+        <i class="fa-solid fa-cart-plus fa-jello"></i>
+        <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill 
+          {{(cartService.totalProducts()==0)?'d-none':'d-inline'}}">
+          {{cartService.totalProducts()}}
+        </span>
+    </button>
+    <h5 class="mb-0">Cart</h5>
+    <button class="see" [disabled]="cartService.productsIntoCart()==[]" 
+      (click)="cartService.clearAllProduct()">
+      Clear All
+    </button>
+  </div>
+  <!-- ****************** products ******************  -->
+  <div class="card-body">
+    @for(item of cartService.productsIntoCart();track item.id){
+      <div class="box d-flex justify-content-between mb-3 p-2">
+        <div class="img">
+          <img src="{{item.img}}">
+        </div> 
+        <div class="middle">
+          <p class="mb-0">{{item.name}}</p>
+          <p class="mb-0">{{ (item.price) | currency}}</p>
+          <div class="updateQun d-flex justify-content-around align-items-center px-3 py-2">
+            <div class="minus">
+              <button type="button" class="me-2 remove"
+                [disabled]="item.qun ==0"
+                (click)="cartService.removeProductFromCart(item)">
+                <i class="fa-solid fa-minus"></i>
+              </button>
+            </div>
+            <div class="number">{{item.qun}}</div>
+            <div class="plus">
+              <button type="button" class="ms-2 add"
+                [disabled]="item.qun ==item.productQun"
+                (click)="cartService.addProductIntoCart(item)">
+                <i class="fa-solid fa-plus"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+        <div>
+          <p class="mb-0">{{ (item.price * item.qun ) | currency}}</p>
+          <i class="fa-solid fa-trash" style="color:red;" (click)="cartService.removeProduct(item.id)"></i>
+        </div>
+      </div>
+    }@empty{
+      <i class="fa-solid fa-basket-shopping basket"></i>
+      <h3 class="card-text">No products add yet </h3>
+      <p class="card-text">Start shopping and add products</p> 
+    }
+  </div>
+  <!-- ****************** checkout button ******************  -->
+  <div class="card-footer text-muted">
+    <button class="checkOut bg-success w-100"
+      (click)="toggelPopup()">
+      <div class="supTotal d-flex justify-content-between align-items-center p-3 w-100">
+          <h6 class="mb-0">Go to checkout </h6>
+          <p class="mb-0">{{cartService.totalPrice() | currency}}</p>
+      </div>
+    </button>
+  </div>
+</div>
+
+
+@if(popup()){
+  <div class="popup">
+    <div class="box">
+      <i class="fa-solid fa-x exit"(click)="toggelPopup()"></i>
+       
+      <!-- ****************** body ******************  -->
+      <div class="body p-4 m-5">  
+        <div class="d-flex justify-content-between align-items-center">
+          <h5>Total Products :</h5>
+          <h5>{{cartService.totalProducts()}}</h5>
+        </div>
+        <div class="d-flex justify-content-between align-items-center">
+          <h5>Total Price :</h5>
+          <h5>{{cartService.totalPrice() |currency}}</h5>
+        </div>
+        <div>
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="radioDefault" id="radioDefault1">
+            <label class="form-check-label" for="radioDefault1">
+              <i class="mainColor fa-solid fa-money-check-dollar"></i> Cache 
+            </label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="radioDefault" id="radioDefault2" checked>
+            <label class="form-check-label" for="radioDefault2">
+              <i class="mainColor fa-brands fa-cc-visa"></i> visa 
+            </label>
+          </div>
+        </div>
+        <button class="see w-100 mt-2" [disabled]="cartService.productsIntoCart()==[]" 
+          (click)="cartService.clearAllProduct();toggelPopup()">
+          Done
+        </button>
+      </div>
+
+      <!-- ****************** update Quntaity Container  ******************  -->
+       
+    </div>
+  </div>
+}
+

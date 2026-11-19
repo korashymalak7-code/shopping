@@ -1,1 +1,156 @@
 /* You can add global styles to this file, and also import other style files */
+
+@use "./../node_modules/@fortawesome/fontawesome-free/css/all.min.css" as * ;
+
+@use "./../node_modules/bootstrap/scss/bootstrap" as *;
+
+@use './../public/assets/mixins' as *;
+
+@use './../public/assets/globalFonts' as *;
+
+$mainColor:#9C2082;
+
+body{
+  background: #23074d;  /* fallback for old browsers */
+  background: -webkit-linear-gradient(to left, #cc5333, #23074d);  /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to left, #cc5333, #23074d); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+
+h1,h2,h3,h4,h5,h6{
+  font-family: "Bricolage Grotesque", sans-serif;
+}
+
+p{
+  font-family: "Forum", serif;
+}
+
+i{
+  cursor:pointer;
+}
+
+.mainColor{
+  color:$mainColor;
+}
+
+.app-product{
+  width:fit-content;
+  display:block;
+}
+
+button.add,
+button.remove{
+  height:30px;
+  width:30px;
+  background-color: $mainColor;
+  border-radius: 50%;
+  @include flex();
+  color:#fff;
+  font-size:16px;
+  border: none;
+  span{
+    background-color:#fff;
+    color:$mainColor;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  }
+}
+
+button.see{
+  padding:5px 15px;
+  background-color: $mainColor;
+  border-radius: 20px;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  color:#fff;
+  transition-duration: .5s;
+  border: none;
+  &:hover{
+    background-color: #fff;
+    color:$mainColor;
+  }
+}
+
+button.remove{
+  background-color:rgba(255,0,0,.5);
+  color:red;
+}
+
+.updateQun{
+  border-radius:5px;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
+ 
+.popup{
+  @include position($p:fixed,$t:0,$l:0);
+  @include flex($ai:end);
+  z-index:100;
+  width:100%;
+  background-color:rgb(156, 32, 130,.5);
+  height: 100vh;
+  .box{
+    position:relative;
+    overflow: hidden;
+    width: 40%;
+    height: 90vh;
+    border-radius: 50px 50px 0px 0px;
+    background-color: #ccc;
+    @include responsive(350){
+      width: 100%;
+      height: 98vh;
+    }
+    @include responsive(450){
+      width: 80%;
+    }
+    @include responsive(650){
+      width: 60%;
+    }
+    @include responsive(850){
+      width: 40%;
+    }
+    .exit{
+      color:#fff;
+      @include position($t:20px,$l:20px);
+    }
+    .addCart{
+      @include position($t:20px,$r:20px);
+      height:30px;
+      width:30px;
+      background-color: $mainColor;
+      border-radius: 50%;
+      @include flex();
+      color:#fff;
+      font-size:16px;
+      border: none;
+      span{
+        background-color:#fff;
+        color:$mainColor;
+        box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+      }
+    }
+    .head{
+      height:300px;
+      img{
+        width:100%;
+        height:100%;
+      }
+      @include flex();
+      box-shadow:0 5px 15px rgba(156,32,130,0.3);
+    }
+    .body{
+      .details{
+        background-color:#fff;
+        border-radius:10px;
+      }
+    }
+    .updateQunContainer{
+        background-color: #fff;
+        position: absolute;
+        bottom: 0;
+        width: 100%;
+      .supTotal{
+        background-color: $mainColor;
+        border-radius: 5px;
+        box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+        color:#fff;
+      }
+    }
+  }
+}

@@ -1,0 +1,51 @@
+@use './../../../../public/assets/mixins'as*;
+
+$mainColor:#9C2082;
+
+.card{
+  height:370px;
+  position: relative;
+  @include responsive(350){
+    max-width:280px;
+  }
+  img{ 
+    height:200px;
+  }
+  .card-body{
+    span{
+      background-color: $mainColor;
+    }
+    .buttons{
+      @include position($b:10px);
+      button.add{
+        height:30px;
+        width:30px;
+        background-color: $mainColor;
+        border-radius: 50%;
+        @include flex();
+        color:#fff;
+        font-size:16px;
+        border: none;
+        span{
+          background-color:#fff;
+          color:$mainColor;
+          box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+        }
+      }
+      button.see{
+        padding:5px 15px;
+        background-color: $mainColor;
+        border-radius: 20px;
+        box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+        color:#fff;
+        transition-duration: .5s;
+        border: none;
+        &:hover{
+          background-color: #fff;
+          color:$mainColor;
+        }
+      }
+    }
+
+  }
+}

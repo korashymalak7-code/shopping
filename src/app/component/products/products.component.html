@@ -1,0 +1,66 @@
+<div class="row row-gap-3 ">
+  @for (product of products(); track product.id) {
+  <div class="col-12 col-md-6 col-lg-4 d-flex justify-content-center align-items-center  d-lg-block">
+    <app-product [productInfo]="product"></app-product>
+  </div>
+  }
+</div>
+
+@if(cartService.isValid()){
+  <div class="popup">
+    <div class="box d-block" [enimate.enter]="'fadeInBox'" [enimate.leave]="'fadeOutBox'"> 
+      <i class="fa-solid fa-x exit"(click)="cartService.togglePopup()"></i>
+      <button type="button" class="me-2 addCart">
+          <i class="fa-solid fa-cart-plus fa-jello"></i>
+          <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill 
+            {{(cartService.totalProducts()==0)?'d-none':'d-inline'}}">
+            {{cartService.totalProducts()}}
+          </span>
+      </button>
+      <!-- ****************** img product ******************  -->
+      <div class="head">
+        <img src="{{cartService.currentPopupProduct().img}}" class="img-fluid" alt="">
+      </div> 
+      <!-- ****************** body ******************  -->
+      <div class="body p-4">  
+        @if(cartService.currentPopupProduct().productQun ==0){
+          <p class="text-danger mt-3">Out of Stock</p>
+        }@else{
+          <p class="text-success mt-3">In Stock</p>
+        }
+        <h3>{{cartService.currentPopupProduct().name}}</h3>
+        <div class="details p-2 mt-4">
+          <h5>Product Details <i class="mainColor fa-solid fa-angle-right fs-6 ms-2"></i></h5>
+          <p class="mb-0">{{cartService.currentPopupProduct().description}}</p>
+        </div>
+      </div>
+      <!-- ****************** update Quntaity Container  ******************  -->
+      <div class="updateQunContainer p-3 d-flex justify-content-around align-items-center">
+        <div class="updateQun d-flex justify-content-around align-items-center px-3 py-2">
+          <div class="minus">
+            <button type="button" class="me-2 remove"
+              [disabled]="cartService.currentPopupProduct().qun==0"
+              (click)="cartService.removeProductFromCart(cartService.currentPopupProduct());cartService.removeProductfromPopup(cartService.currentPopupProduct())">
+              <i class="fa-solid fa-minus"></i>
+            </button>
+          </div>
+          <div class="number">{{cartService.currentPopupProduct().qun}}</div>
+          <div class="plus">
+            <button type="button" class="ms-2 add"
+                [disabled]="cartService.currentPopupProduct().qun ==cartService.currentPopupProduct().productQun"
+                (click)="cartService.addProductIntoCart(cartService.currentPopupProduct());cartService.addProductIntoPopup(cartService.currentPopupProduct())">
+                <i class="fa-solid fa-plus"></i>
+            </button>
+          </div>
+        </div>
+        <div class="supTotal d-flex justify-content-around align-items-center p-3 w-50">
+            <p class="mb-0">Update</p>
+            <div>
+              <h6>{{(cartService.currentPopupProduct().price *cartService.currentPopupProduct().qun)| currency}}</h6>
+              <p class="mb-0 text-grey">{{cartService.currentPopupProduct().price | currency}}</p>
+            </div>
+        </div>
+      </div>
+    </div>
+  </div>
+}

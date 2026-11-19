@@ -1,0 +1,23 @@
+<div class="card">
+  <img src="{{productInfo().img}}" class="card-img-top img-fluid" alt="{{productInfo().name}}">
+  <div class="card-body">
+    @if(productInfo().price<50){
+      <span class="badge">Budget Friendly</span>
+    }
+     
+    <h5 class="card-title">{{productInfo().name}}</h5>
+    <p class="card-text">{{productInfo().price |currency}}</p>
+    <div class="buttons d-flex justify-content-between align-content-end w-75">
+      <button type="button" class="me-2 add position-relative" 
+        [disabled]="cartService.quantityInOneProduct(productInfo())==productInfo().productQun"
+        (click)="addProduct(productInfo())">
+        <i class="fa-solid fa-plus"></i>
+        <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill
+          {{((cartService.quantityInOneProduct(productInfo()))==0)?'d-none':'d-inline'}}">
+          {{cartService.quantityInOneProduct(productInfo())}}
+        </span>
+      </button>
+      <button class="see"(click)="cartService.productPopup(productInfo());cartService.togglePopup()">See More</button>
+    </div>
+  </div>
+</div>

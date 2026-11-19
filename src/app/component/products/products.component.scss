@@ -1,0 +1,66 @@
+@use './../../../../public/assets/mixins'as*;
+
+$mainColor:rgb(156, 32, 130);
+
+@keyframes fadeInBox{
+  from{
+    opacity:0;
+    transform: translateY(-100%);
+  }
+  to{
+    opacity:1;
+    transform: translateY(0%);
+  }
+}
+
+@keyframes fadeOutBox{
+  from{
+    opacity:1;
+    transform: translateY(0%);
+  }
+  to{
+    opacity:0;
+    transform: translateY(-100%);
+  }
+}
+
+@keyframes fadeInPopup{
+  from{
+    opacity:0;
+  }
+  to{
+    opacity:1;
+  }
+}
+
+@keyframes fadeOutPopup{
+  from{
+    opacity:1;
+  }
+  to{
+    opacity:0;
+  }
+}
+
+.fadeInPopup{
+  animation:fadeInPopup .2s linear;
+}
+
+.fadeOutPopup{
+  animation:fadeOutPopup .2s linear;
+}
+
+.fadeInBox{
+  animation:fadeInBox 1s linear;
+}
+
+.fadeOutBox{
+  animation:fadeOutBox 1s linear;
+}
+
+.row{
+  .col-lg4.col-md-6{
+    width:fit-content;
+  }
+}
+ 
